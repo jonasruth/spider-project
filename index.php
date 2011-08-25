@@ -10,7 +10,7 @@ if($config->connection_proxy_enabled === true){
     curl_setopt($ch, CURLOPT_PROXY, $config->connection_proxy);
     curl_setopt($ch, CURLOPT_PROXYPORT, $config->connection_proxy_port);
 }
-define('SPIDER_GLOBAL_MAX_ITERATION',100);
+define('SPIDER_GLOBAL_MAX_ITERATION',100000);
 
 if($config->only_this_domain === true){
     if(preg_match('/([\w]+)\.([a-z]{2,3})(\.([a-z]{2}))?\/?$/',$config->url,$matches)){
@@ -50,7 +50,7 @@ function search_url($search_url,$max_depth,$depth=0)
     if($global_count >= SPIDER_GLOBAL_MAX_ITERATION) {echo 'GLOBAL MAX ITERATIONS EXCEED...'; exit;};
     $link_count = 0;
 
-    if(!preg_match('/\.(exe|jpg|jpeg|swf|png|gif|tar|gz|zip|wmv|avi)$/i',$search_url))
+    if(!preg_match('/\.(exe|msi|jpg|jpeg|swf|png|gif|rar|tar|gz|zip|wmv|avi)$/i',$search_url))
     {
         echo "[ Resource: {$search_url} ] OK".PHP_EOL;
         curl_setopt($ch,CURLOPT_URL,$search_url);
